@@ -6,20 +6,13 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
 import Divider from "@mui/material/Divider";
+import { useWindow } from "../../../hooks/notes/useWindow"; 
+
 
 // to search for notes by name
 export const SearchBar = ({ onSortChange }) => {
-    const [window, windowOpen] = useState(null);
+    const { open, window, handleOpen, handleClose } = useWindow();
     const [currentField, setCurrentField] = useState("updated_at");
-    const open = Boolean(window);
-
-    const handleFilterClick = (event) => {
-        windowOpen(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        windowOpen(null);
-    };
 
     const handleSelect = (option) => {
         handleClose();
@@ -50,8 +43,8 @@ export const SearchBar = ({ onSortChange }) => {
                 fullWidth InputProps={{
                     endAdornment: (
                         <InputAdornment position="end"> <SearchIcon /> </InputAdornment>),
-                }} /> <FilterAltIcon onClick={handleFilterClick} />
-            <FilterButton window={window}
+                }} /> <FilterAltIcon onClick={handleOpen} />
+            <FilterButton anchorEl={window}
                 open={open}
                 handleClose={handleClose}
                 handleSelect={handleSelect} />
@@ -64,7 +57,7 @@ export const SearchBar = ({ onSortChange }) => {
 export const FilterButton = ({ anchorEl, open, handleClose, handleSelect }) => {
     return (
         <Menu
-            window={window}
+            anchorEl={anchorEl}
             open={open}
             onClose={handleClose}>
             <MenuItem onClick={() => handleSelect("ascending")}>Ascending</MenuItem>
