@@ -1,30 +1,37 @@
 // src/hooks/notes/useNotesPreview.js
 import { useState, useEffect, useMemo } from "react";
 import { notesApi } from "../../services/notes.service";
+import { useCallback } from "react";
 
 
 export const getNoteList = ({ sortBy = "updated_at", order = "desc" } = {}) => {
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchNotes = async () => {
-      setLoading(true);
-      try {
-        const data = await notesApi.getUserNotes(sortBy, order); // filtering is optional, depends on user
-        // if no input, then just return def: descending, by updated_at
-        setNotes(data);
-      } catch (err) {
-        console.error("Failed to fetch notes:", err.message);
-        setNotes([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchNotes();
+  const fetchNotes = useCallback(async () => {
+    setLoading(true);
+    try {
+      const data = await notesApi.getUserNotes(sortBy, order);
+      setNotes(data);
+    } catch (err) {
+      console.error("Failed to fetch notes:", err.message);
+      setNotes([]);
+    } finally {
+      setLoading(false);
+    }
   }, [sortBy, order]);
 
-  return { notes, loading };
+  // Fetch notes initially and whenever sort/order change
+  useEffect(() => {
+    fetchNotes();
+  }, [fetchNotes]);
+
+  // Expose a manual refresh function
+  const refreshNotes = useCallback(async () => {
+    return await fetchNotes();
+  }, [fetchNotes]);
+
+  return { notes, loading, refreshNotes };
 };
 
 
