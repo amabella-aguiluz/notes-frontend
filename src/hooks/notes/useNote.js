@@ -19,16 +19,17 @@ export const deleteNoteWrapper = async (note_id) => {
     }
 };
 
-export const useNote = ({ note_id,
+export const useNote = ({ note_id: initialNoteId,
     editor }) => {
 
+    const [note_id, setNoteId] = useState(initialNoteId);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [created_at, setCreatedAt] = useState(null);
     const [updated_at, setUpdatedAt] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    // load note if it exists
+    // load note 
     useEffect(() => {
         if (!note_id) return;
 
@@ -79,6 +80,7 @@ export const useNote = ({ note_id,
                 saved = await notesApi.updateNote(note_id, title, description);
             } else {
                 saved = await notesApi.createNote(title, description);
+                setNoteId(saved.note_id); // store the new id
             }
             return saved;
         } catch (err) {
