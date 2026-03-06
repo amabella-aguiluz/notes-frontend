@@ -67,7 +67,7 @@ export const useNote = ({ note_id: initialNoteId,
     }, [note_id, editor]);
 
     // Save note
-    const saveNote = async (updatedData = {}) => {
+    const saveNote = async () => {
         const now = new Date().toISOString();
         setUpdatedAt(now);
         if (!created_at) setCreatedAt(now);

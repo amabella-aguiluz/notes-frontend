@@ -2,11 +2,13 @@
 import SearchBar from "./searchbar";
 import AddIcon from '@mui/icons-material/Add';
 
-export const ActionBar = ({onAddNote}) => {
-    return(
+export const ActionBar = ({ onAddNote, onSortChange }) => {
+    return (
         <div>
-            <SearchBar />
-            <AddIcon onClick={onAddNote}/>
+            <SearchBar
+                onSortChange={onSortChange}
+            />
+            <AddIcon onClick={onAddNote} />
         </div>
     )
 }

@@ -3,7 +3,7 @@ import { useState, useEffect, useMemo } from "react";
 import { notesApi } from "../../services/notes.service";
 
 
-export const useNoteList = ({ searchQuery = "", sortBy = "updated_at", order = "desc" } = {}) => {
+export const getNoteList = ({ sortBy = "updated_at", order = "desc" } = {}) => {
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -24,19 +24,7 @@ export const useNoteList = ({ searchQuery = "", sortBy = "updated_at", order = "
     fetchNotes();
   }, [sortBy, order]);
 
-  // Filter notes locally by search query
-  const filteredNotes = useMemo(() => {
-    if (!searchQuery) return notes;
-    const q = searchQuery.toLowerCase();
-    return notes.filter(
-      note =>
-        note.title?.toLowerCase().includes(q) ||
-        note.description?.toLowerCase().includes(q)
-    );
-  }, [searchQuery, notes]);
-
-
-  return { notes: filteredNotes, loading };
+  return { notes, loading };
 };
 
 
