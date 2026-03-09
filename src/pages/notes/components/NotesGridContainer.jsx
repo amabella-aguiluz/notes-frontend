@@ -1,15 +1,13 @@
 //notesgridcontainer.jsx 
-import {React, useState} from "react";
+import { React, useState } from "react";
 import EditNote from "../EditNote";
-import { useNoteList } from "../../../hooks/notes/useNotePreview";
+import { getNoteList } from "../../../hooks/notes/useNotePreview";
 import NotePreview from "./NotePreview";
 
 
-const NotesGridContainer = () => {
-  const { notes, loading } = useNoteList(); 
+const NotesGridContainer = ({ notes = [], loading }) => {
   const [openNoteId, setOpenNoteId] = useState(null);
-
-  if (loading) return <p>Loading notes...</p>;
+  if (loading) return "Loading notes...";
 
   return (
     <div>

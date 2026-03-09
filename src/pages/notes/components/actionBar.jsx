@@ -1,12 +1,15 @@
 //actionbar.jsx
-import NoteActions from "./noteActions";
 import SearchBar from "./searchbar";
+import AddIcon from '@mui/icons-material/Add';
 
-export const ActionBar = () => {
-    return(
+export const ActionBar = ({ onAddNote, onSortChange, onSearch }) => {
+    return (
         <div>
-            <SearchBar />
-            <NoteActions />
+            <SearchBar
+                onSortChange={onSortChange}
+                onSearch={onSearch}
+            />
+            <AddIcon onClick={onAddNote} />
         </div>
     )
 }
