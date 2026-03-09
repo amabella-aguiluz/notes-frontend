@@ -3,28 +3,28 @@ import { useState, useEffect, useMemo } from "react";
 import { notesApi } from "../../services/notes.service";
 
 
-export const getNoteList = ({ sortBy = "updated_at", order = "desc" } = {}) => {
+export const getNoteList = ({ sortBy = "updated_at", order = "desc", query = "" } = {}) => {
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchNotes = async () => {
-      setLoading(true);
-      try {
-        const data = await notesApi.getUserNotes(sortBy, order); // filtering is optional, depends on user
-        // if no input, then just return def: descending, by updated_at
-        setNotes(data);
-      } catch (err) {
-        console.error("Failed to fetch notes:", err.message);
-        setNotes([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchNotes();
-  }, [sortBy, order]);
+  const fetchNotes = async () => {
+    setLoading(true);
+    try {
+      const data = await notesApi.searchNotes(query, sortBy, order); // include sort/order
+      setNotes(data);
+    } catch (err) {
+      console.error("Failed to fetch notes:", err.message);
+      setNotes([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  return { notes, loading };
+  useEffect(() => {
+    fetchNotes();
+  }, [sortBy, order, query]);
+
+  return { notes, loading, refreshNotes: fetchNotes };
 };
 
 

@@ -5,8 +5,7 @@ import { getNoteList } from "../../../hooks/notes/useNotePreview";
 import NotePreview from "./NotePreview";
 
 
-const NotesGridContainer = ({ sortBy, order }) => {
-  const { notes, loading } = getNoteList({ sortBy, order });
+const NotesGridContainer = ({ notes = [], loading }) => {
   const [openNoteId, setOpenNoteId] = useState(null);
   if (loading) return "Loading notes...";
 
