@@ -9,7 +9,7 @@ import { notesApi } from "../../services/notes.service";
 // save / delete note using notesservice
 // exposes editor instance for editing
 
-export const deleteNote = async () => {
+export const deleteNoteWrapper = async (note_id) => {
     if (!note_id) return;
     try {
         await notesApi.deleteNote(note_id);
@@ -19,38 +19,17 @@ export const deleteNote = async () => {
     }
 };
 
-// Save note
-export const saveNote = async (updatedData = {}) => {
-    const now = new Date().toISOString();
-    setUpdatedAt(now);
-    if (!created_at) setCreatedAt(now);
-
-    const noteData = { title, description, ...updatedData };
-
-    try {
-        let saved;
-        if (note_id) {
-            saved = await notesApi.updateNote(note_id, noteData.title, noteData.description);
-        } else {
-            saved = await notesApi.createNote(noteData.title, noteData.description);
-        }
-        return saved;
-    } catch (err) {
-        console.error("Failed to save note:", err.message);
-        throw err;
-    }
-};
-
-export const useNote = ({ note_id,
+export const useNote = ({ note_id: initialNoteId,
     editor }) => {
 
+    const [note_id, setNoteId] = useState(initialNoteId);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [created_at, setCreatedAt] = useState(null);
     const [updated_at, setUpdatedAt] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    // load note if it exists
+    // load note 
     useEffect(() => {
         if (!note_id) return;
 
@@ -73,19 +52,55 @@ export const useNote = ({ note_id,
                 if (editor) {
                     editor.commands.setContent(note.description || "");
                 }
-                } catch (err) {
-                    console.error("Failed to load note:", err.message);
-                } finally {
-                    setLoading(false);
-                }
-            };
+            } catch (err) {
+                console.error("Failed to load note:", err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-            loadNote();
+        loadNote();
 
-            return () => {
-                cancelled = true;
-            };
-        }, [note_id, editor]);
+        return () => {
+            cancelled = true;
+        };
+    }, [note_id, editor]);
+
+    // Save note
+    const saveNote = async () => {
+        const now = new Date().toISOString();
+        setUpdatedAt(now);
+        if (!created_at) setCreatedAt(now);
+
+        const description = editor?.getHTML() || "";
+
+        try {
+            let saved;
+            if (note_id) {
+                saved = await notesApi.updateNote(note_id, title, description);
+            } else {
+                saved = await notesApi.createNote(title, description);
+                setNoteId(saved.note_id); // store the new id
+            }
+            return saved;
+        } catch (err) {
+            console.error("Failed to save note:", err.message);
+            throw err;
+        }
+    };
+
+    const deleteNote = async () => {
+        if (!note_id) return;
+
+        try {
+            await deleteNoteWrapper(note_id);
+            setTitle("");         // reset local state if needed
+            setDescription("");
+            editor?.commands.clearContent();
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
     return {
         title,
