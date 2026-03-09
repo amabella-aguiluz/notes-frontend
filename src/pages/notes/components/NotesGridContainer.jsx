@@ -5,8 +5,7 @@ import { getNoteList } from "../../../hooks/notes/useNotePreview";
 import NotePreview from "./NotePreview";
 
 
-const NotesGridContainer = ({ notes = [], loading }) => {
-  const [openNoteId, setOpenNoteId] = useState(null);
+const NotesGridContainer = ({ notes = [], loading, onOpenNote }) => {
   if (loading) return "Loading notes...";
 
   return (
@@ -23,22 +22,13 @@ const NotesGridContainer = ({ notes = [], loading }) => {
               description={note.description}
               updated_at={note.updated_at}
               created_at={note.created_at}
-              onOpen={() => setOpenNoteId(note.note_id)}
+              onOpen={() => onOpenNote(note)}
             />
           ))
         ) : (
           <p>You don’t have any notes.</p>
         )}
       </div>
-
-      {/* if a note is opened */}
-      {openNoteId && (
-        <div onClick={() => setOpenNoteId(null)}>
-          <div onClick={(e) => e.stopPropagation()}>
-            <EditNote note={notes.find(n => n.note_id === openNoteId)} onClose={() => setOpenNoteId(null)} />
-          </div>
-        </div>
-      )}
     </div>
   );
 };
