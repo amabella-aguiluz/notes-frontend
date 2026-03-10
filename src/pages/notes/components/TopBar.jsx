@@ -1,15 +1,23 @@
 //topbar.jsx
 import Link from "@mui/material/Link";
-import { Link as RouterLink } from "react-router-dom";
+import { useAuth } from "../../../context/authContext";
+import { useNavigate } from "react-router-dom";
 
 // app name + log out button
 export const TopBar = () => {
-    return(
+    const { logout } = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        navigate("/login");
+    };
+    return (
         <div>
-        <h1>Find Your Pages</h1>
-        {/* TODO: aesthetically pleasing log out button */}
-        <Link component={RouterLink} to="/login">Log Out</Link>      
-        </div>  
+            <h1>Find Your Pages</h1>
+            {/* TODO: aesthetically pleasing log out button */}
+            <Link onClick={handleLogout}>Log Out</Link>
+        </div>
     );
 };
 

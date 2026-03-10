@@ -7,19 +7,14 @@ import { useLogin } from "../../hooks/auth/useLogin";
 
 
 export const LoginPage = () => {
-  const { handleLogin } = useLogin(); // <- context must exist
+  const { handleLogin, error } = useLogin();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
 
-  const onSubmit = async (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    try {
-      await handleLogin(email, password);
-    } catch (err) {
-      setError(err.message || "Invalid email or password");
-    }
-    console.log("SUBMIT FIRED");
+    handleLogin(email, password);
   };
 
   return (
