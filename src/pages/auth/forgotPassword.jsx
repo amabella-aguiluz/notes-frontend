@@ -2,10 +2,13 @@
 import { useState } from "react";
 import { forgotPassword } from "../../services/auth.service"; 
 import { TextField, Button, Typography } from "@mui/material";
+import Link from "@mui/material/Link";
+import { Link as RouterLink } from "react-router-dom";
+import AuthPage from "./components/auth_page"; // adjust path if needed
 
 export const ForgotPassword = () => {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState(""); // success or error message
+  const [status, setStatus] = useState(""); 
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -13,7 +16,7 @@ export const ForgotPassword = () => {
     setLoading(true);
     setStatus("");
     try {
-      await forgotPassword(email); // backend generates token & sends email
+      await forgotPassword(email);
       setStatus("Check your email for the reset link.");
     } catch (err) {
       setStatus(err.response?.data?.message || "Something went wrong");
@@ -22,9 +25,8 @@ export const ForgotPassword = () => {
     }
   };
 
-  return (
-    <div style={{ maxWidth: 400, margin: "2rem auto" }}>
-      <Typography variant="h5">Forgot Password</Typography>
+  const form = (
+    <>
       <form onSubmit={handleSubmit}>
         <TextField
           label="Email"
@@ -34,13 +36,18 @@ export const ForgotPassword = () => {
           margin="normal"
           required
         />
+        <p>
+        <Link component={RouterLink} to="/login">Go back</Link>
+      </p>
         <Button type="submit" variant="contained" disabled={loading} fullWidth>
           {loading ? "Sending..." : "Send Reset Link"}
         </Button>
       </form>
       {status && <Typography style={{ marginTop: "1rem" }}>{status}</Typography>}
-    </div>
+    </>
   );
+
+  return <AuthPage type="Forgot Password" typeInput={form} />;
 };
 
 export default ForgotPassword;

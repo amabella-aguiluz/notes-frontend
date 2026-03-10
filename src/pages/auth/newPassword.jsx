@@ -3,12 +3,13 @@ import { useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { resetPassword } from "../../services/auth.service";
 import { TextField, Button, Typography } from "@mui/material";
+import AuthPage from "./components/auth_page"; // adjust path if needed
 
 export const ResetPassword = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const token = searchParams.get("token");
 
-  const token = searchParams.get("token"); // get token from URL
   const [newPassword, setNewPassword] = useState("");
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
@@ -22,7 +23,6 @@ export const ResetPassword = () => {
 
     setLoading(true);
     setStatus("");
-
     try {
       await resetPassword({ token, newPassword });
       setStatus("Password reset successfully! Redirecting to login...");
@@ -34,9 +34,8 @@ export const ResetPassword = () => {
     }
   };
 
-  return (
-    <div style={{ maxWidth: 400, margin: "2rem auto" }}>
-      <Typography variant="h5">Reset Password</Typography>
+  const form = (
+    <>
       <form onSubmit={handleSubmit}>
         <TextField
           label="New Password"
@@ -52,8 +51,10 @@ export const ResetPassword = () => {
         </Button>
       </form>
       {status && <Typography style={{ marginTop: "1rem" }}>{status}</Typography>}
-    </div>
+    </>
   );
+
+  return <AuthPage type="Reset Password" typeInput={form} />;
 };
 
 export default ResetPassword;

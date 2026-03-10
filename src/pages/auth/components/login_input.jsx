@@ -28,7 +28,7 @@ export const LoginInput = ({
         onChange={(e) => setPassword(e.target.value)}
       />
       <p>
-        <Link component={RouterLink} to="/register">Forgot password?</Link>
+        <Link component={RouterLink} to="/forgot-password">Forgot password?</Link>
       </p>
 
       <Button type="submit" variant="contained">

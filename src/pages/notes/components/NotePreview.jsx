@@ -10,7 +10,7 @@ export const NotePreview = ({ id, title, description, updated_at, created_at, on
     const firstParagraph = useNotePreviewContent(description);
 
     return (
-        <div onClick={onOpen}>
+        <div className="notePreview" onClick={onOpen}>
             <div>{/*  inner div with padding */}
                 <h3>{title}</h3>
                 <p>Last modified: {useLocalTime(updated_at)}</p>

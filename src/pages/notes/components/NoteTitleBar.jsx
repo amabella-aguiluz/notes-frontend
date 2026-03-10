@@ -32,10 +32,10 @@ import StarterKit from '@tiptap/starter-kit'
 export const NoteBodyEditor = ({ editor }) => {
   if(!editor) return null;
   return (
-    <div>
+    <div className="noteEditorContainer">
       <>
         <TextMenu editor={editor}/>
-        <EditorContent editor={editor} />
+        <EditorContent className="editorContent" editor={editor} />
       </>
     </div>
   );
@@ -51,17 +51,17 @@ export const TextMenu = ({editor}) => {
 
   // todo: make the buttons smaller
   return(
-  <BubbleMenu editor={editor}>
-    <button onClick={() => editor.chain().focus().toggleBold().run()}>
+  <BubbleMenu className="bubbleMenu" editor={editor}>
+    <button className="bubbleButton" onClick={() => editor.chain().focus().toggleBold().run()}>
       <FormatBoldIcon />
     </button>
-    <button onClick={() => editor.chain().focus().toggleItalic().run()}>
+    <button className="bubbleButton" onClick={() => editor.chain().focus().toggleItalic().run()}>
       <FormatItalicIcon />
     </button>
-    <button onClick={() => editor.chain().focus().toggleStrike().run()}>
+    <button className="bubbleButton" onClick={() => editor.chain().focus().toggleStrike().run()}>
       <StrikethroughSIcon />
     </button>
-    <button onClick={() => editor.chain().focus().toggleBulletList().run()}>
+    <button className="bubbleButton" onClick={() => editor.chain().focus().toggleBulletList().run()}>
       <FormatListBulletedIcon />
     </button>
   </BubbleMenu>);

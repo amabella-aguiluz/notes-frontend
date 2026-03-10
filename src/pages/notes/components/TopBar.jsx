@@ -13,7 +13,7 @@ export const TopBar = () => {
         navigate("/login");
     };
     return (
-        <div>
+        <div className="topBar">
             <h1>Find Your Pages</h1>
             {/* TODO: aesthetically pleasing log out button */}
             <Link onClick={handleLogout}>Log Out</Link>

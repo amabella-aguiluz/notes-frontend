@@ -43,15 +43,7 @@ const EditNote = ({ note, onClose }) => {
   return (
     <div style={{position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.7)', display:'flex', justifyContent: 'center', alignItems: 'center', zIndex: 999}}
     onClick={closeNote}>
-    <div style={{
-          backgroundColor: '#fff',
-          padding: '1.5rem',
-          borderRadius: '0.5rem',
-          width: 'auto',
-          maxHeight: '100%',
-          height: 'auto',
-          overflowY: 'auto',
-        }}
+    <div className="editNote" 
         onClick={e => e.stopPropagation() }
      >
       <NoteTitleBar

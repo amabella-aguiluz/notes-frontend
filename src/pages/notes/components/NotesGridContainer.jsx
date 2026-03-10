@@ -10,7 +10,7 @@ const NotesGridContainer = ({ notes = [], loading, onOpenNote }) => {
     <div>
 
       {/* // displays map of notes  */}
-      <div style={{ display: "grid", gap: "1rem" }}>
+      <div className="noteGrid">
         {notes.length > 0 ? (
           notes.map((note) => (
             <NotePreview

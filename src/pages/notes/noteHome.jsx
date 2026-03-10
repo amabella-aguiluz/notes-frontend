@@ -5,6 +5,7 @@ import NotesGridContainer from "./components/NotesGridContainer";
 import { useState } from "react";
 import EditNote from "./EditNote";
 import { getNoteList } from "../../hooks/notes/useNotePreview";
+import "../../styles/notes.css";
 
 export const NoteHome = () => {
     const [activeNote, setActiveNote] = useState(null);
@@ -19,7 +20,7 @@ export const NoteHome = () => {
     };
 
     return (
-        <div id="noteHome">
+        <div className="noteHome">
             <TopBar />
             <ActionBar onAddNote={handleAddNote}
                 onSortChange={(newSortBy, newOrder) => {
