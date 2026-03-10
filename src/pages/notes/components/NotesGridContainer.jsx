@@ -1,7 +1,5 @@
 //notesgridcontainer.jsx 
 import { React, useState } from "react";
-import EditNote from "../EditNote";
-import { getNoteList } from "../../../hooks/notes/useNotePreview";
 import NotePreview from "./NotePreview";
 
 

@@ -16,7 +16,7 @@ export const useRegister = () => {
 
       await login(email, password);
     } catch (err) {
-      setError(err.response?.data?.message || "Registration failed");
+      setError(err.response?.data?.error);
     } finally {
       setLoading(false);
     }

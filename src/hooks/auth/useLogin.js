@@ -16,7 +16,7 @@ export const useLogin = () => {
       await login(email, password);
       navigate("/notes");
     } catch (err) {
-      setError(err.response?.data?.message || "Login failed");
+      setError(err.response?.data?.error);
     } finally {
       setLoading(false);
     }
