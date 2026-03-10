@@ -8,14 +8,13 @@ import React from "react";
 import StarterKit from '@tiptap/starter-kit';
 
 
-const EditNote = ({ note }) => {
+const EditNote = ({ note, onClose }) => {
   const { open, handleOpen, handleClose } = useWindow();
 
   // Open modal when component mounts
   React.useEffect(() => {
-    handleOpen();
-  }, []);
-
+    if (note) handleOpen();   // only open if a note is set
+  }, [note, handleOpen]);
 
   const editor = useEditor({
     extensions: [StarterKit],
@@ -32,11 +31,18 @@ const EditNote = ({ note }) => {
     setTimestamps,
   } = useNote({ note_id: note.note_id, editor });
 
+  // If modal closed internally, notify parent
+  const closeNote = () => {
+    handleClose(); // close internal window
+    if (onClose) onClose();  // tell parent
+  };
+
+
   if (!open) return null; // don't render if closed
 
   return (
     <div style={{position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.7)', display:'flex', justifyContent: 'center', alignItems: 'center', zIndex: 999}}
-    onClick={handleClose}>
+    onClick={closeNote}>
     <div style={{
           backgroundColor: '#fff',
           padding: '1.5rem',
