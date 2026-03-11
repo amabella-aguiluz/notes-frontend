@@ -1,5 +1,5 @@
 //notehome.jsx
-import TopBar from "./components/topbar";
+import TopBar from "./components/TopBar";
 import ActionBar from "./components/actionBar";
 import NotesGridContainer from "./components/NotesGridContainer";
 import { useState } from "react";
@@ -13,7 +13,7 @@ export const NoteHome = () => {
     const [sortBy, setSortBy] = useState("updated_at");
     const [order, setOrder] = useState("desc");
     const [searchQuery, setSearchQuery] = useState("");
-    const { notes, loading } = getNoteList({ sortBy, order, query: searchQuery });
+    const { notes, loading, refreshNotes } = getNoteList({ sortBy, order, query: searchQuery });
 
     const handleAddNote = () => {
         setActiveNote({ note_id: undefined }); // new note
@@ -37,6 +37,7 @@ export const NoteHome = () => {
                 <EditNote
                     note={activeNote}
                     onClose={() => setActiveNote(null)}
+                    onRefresh={refreshNotes}
                 />
             )}
         </div>

@@ -8,7 +8,8 @@ export const useLogin = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogin = async (email, password) => {
+  // login function
+  const handleLogin = useCallback(async (email, password) => {
     setLoading(true);
     setError(null);
 
@@ -20,7 +21,14 @@ export const useLogin = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [navigate]);
 
-  return { handleLogin, error, loading };
+  // logout function
+  const logout = useCallback(() => {
+    localStorage.removeItem("token");
+    setIsAuthenticated(false);
+    navigate("/login");
+  }, [navigate]);
+
+  return { isAuthenticated, loading, error, handleLogin, logout };
 };

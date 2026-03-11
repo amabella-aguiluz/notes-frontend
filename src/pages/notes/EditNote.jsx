@@ -8,7 +8,7 @@ import React from "react";
 import StarterKit from '@tiptap/starter-kit';
 
 
-const EditNote = ({ note, onClose }) => {
+const EditNote = ({ note, onClose, onRefresh }) => {
   const { open, handleOpen, handleClose } = useWindow();
 
   // Open modal when component mounts
@@ -37,27 +37,50 @@ const EditNote = ({ note, onClose }) => {
     if (onClose) onClose();  // tell parent
   };
 
+  const handleSave = async () => {
+    try {
+      await saveNote();     // Step A: Wait for the API to finish saving
+      if (onRefresh) {
+          onRefresh();      // Step B: Tell NoteHome to re-fetch the list
+      }
+      onClose();            // Step C: Close the modal
+    } catch (err) {
+      console.error("Save failed:", err);
+    }
+  };
+
+  // 2. Create a "Wrapper" for Deleting
+  const handleDelete = async () => {
+    try {
+      await deleteNote();
+      if (onRefresh) onRefresh();
+      onClose();            // Close after delete
+    } catch (err) {
+      console.error("Delete failed:", err);
+    }
+  };
+
 
   if (!open) return null; // don't render if closed
 
   return (
-    <div style={{position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.7)', display:'flex', justifyContent: 'center', alignItems: 'center', zIndex: 999}}
-    onClick={closeNote}>
-    <div className="editNote" 
-        onClick={e => e.stopPropagation() }
-     >
-      <NoteTitleBar
-        title={title}
-        setTitle={setTitle}
-        onSave={saveNote}
-        onDelete={deleteNote}
-      />
+    <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 999 }}
+      onClick={closeNote}>
+      <div className="editNote"
+        onClick={e => e.stopPropagation()}
+      >
+        <NoteTitleBar
+          title={title}
+          setTitle={setTitle}
+          onSave={handleSave}   // <-- Use the new handler
+          onDelete={handleDelete}
+        />
 
-      <p>Last modified: {useLocalTime(updated_at)}</p>
-      <p>Created: {useLocalTime(created_at)}</p>
+        <p>Last modified: {useLocalTime(updated_at)}</p>
+        <p>Created: {useLocalTime(created_at)}</p>
 
-      <NoteBodyEditor editor={editor} />
-    </div>
+        <NoteBodyEditor editor={editor} />
+      </div>
     </div>
   );
 };
