@@ -6,13 +6,14 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
 import Divider from "@mui/material/Divider";
-import { useWindow } from "../../../hooks/notes/useWindow"; 
+import { useWindow } from "../../../hooks/notes/useWindow";
 
 
 // to search for notes by name
-export const SearchBar = ({ onSortChange }) => {
+export const SearchBar = ({ onSortChange, onSearch }) => {
     const { open, window, handleOpen, handleClose } = useWindow();
     const [currentField, setCurrentField] = useState("updated_at");
+    const [input, setInput] = useState("");
 
     const handleSelect = (option) => {
         handleClose();
@@ -36,13 +37,25 @@ export const SearchBar = ({ onSortChange }) => {
         if (onSortChange) onSortChange(sortBy, order);
     };
 
+    const handleSearch = () => {
+        if (onSearch) onSearch(input);
+    };
+
+    const handleKeyPress = (e) => {
+        if (e.key === "Enter") handleSearch();
+    };
+
     return (
         <div>
             <TextField id="outlined-basic" label="Search..." variant="outlined"
-                // puts a search icon on the right side
-                fullWidth InputProps={{
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyPress={handleKeyPress}
+                InputProps={{
                     endAdornment: (
-                        <InputAdornment position="end"> <SearchIcon /> </InputAdornment>),
+                        <InputAdornment position="end">
+                            <SearchIcon onClick={handleSearch} />
+                        </InputAdornment>),
                 }} /> <FilterAltIcon onClick={handleOpen} />
             <FilterButton anchorEl={window}
                 open={open}

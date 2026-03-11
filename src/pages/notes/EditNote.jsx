@@ -3,10 +3,19 @@ import { NoteTitleBar, NoteBodyEditor } from "./components/NoteTitleBar.jsx";
 import { useLocalTime } from "../../util/localTime.js";
 import { useNote } from "../../hooks/notes/useNote.js";
 import { useEditor } from '@tiptap/react';
+import { useWindow } from "../../hooks/notes/useWindow.js";
+import React from "react";
 import StarterKit from '@tiptap/starter-kit';
 
 
-const EditNote = ({ note, onClose, onSave, onDelete }) => {
+const EditNote = ({ note, onClose, onRefresh }) => {
+  const { open, handleOpen, handleClose } = useWindow();
+
+  // Open modal when component mounts
+  React.useEffect(() => {
+    if (note) handleOpen();   // only open if a note is set
+  }, [note, handleOpen]);
+
   const editor = useEditor({
     extensions: [StarterKit],
     content: '',
@@ -22,46 +31,48 @@ const EditNote = ({ note, onClose, onSave, onDelete }) => {
     setTimestamps,
   } = useNote({ note_id: note.note_id, editor });
 
-  const handleSave = async () => {
-    await saveNote();
-    if (onSave) onSave();
-    if (onClose) onClose();
+  // If modal closed internally, notify parent
+  const closeNote = () => {
+    handleClose(); // close internal window
+    if (onClose) onClose();  // tell parent
   };
 
-  const handleDelete = async () => {
-    await deleteNote();
-    if (onDelete) onDelete(); 
-    if (onClose) onClose();
+  const handleSave = async () => {
+    try {
+      await saveNote();     // Step A: Wait for the API to finish saving
+      if (onRefresh) {
+          onRefresh();      // Step B: Tell NoteHome to re-fetch the list
+      }
+      onClose();            // Step C: Close the modal
+    } catch (err) {
+      console.error("Save failed:", err);
+    }
   };
+
+  // 2. Create a "Wrapper" for Deleting
+  const handleDelete = async () => {
+    try {
+      await deleteNote();
+      if (onRefresh) onRefresh();
+      onClose();            // Close after delete
+    } catch (err) {
+      console.error("Delete failed:", err);
+    }
+  };
+
+
+  if (!open) return null; // don't render if closed
 
   return (
-    <div
-      style={{
-        position: 'fixed',
-        inset: 0,
-        backgroundColor: 'rgba(0,0,0,0.7)',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        zIndex: 999
-      }}
-      onClick={onClose}>
-      <div
-        style={{
-          backgroundColor: '#fff',
-          padding: '1.5rem',
-          borderRadius: '0.5rem',
-          width: 'auto',
-          maxHeight: '100%',
-          height: 'auto',
-          overflowY: 'auto',
-        }}
+    <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 999 }}
+      onClick={closeNote}>
+      <div className="editNote"
         onClick={e => e.stopPropagation()}
       >
         <NoteTitleBar
           title={title}
           setTitle={setTitle}
-          onSave={handleSave}
+          onSave={handleSave}   // <-- Use the new handler
           onDelete={handleDelete}
         />
 

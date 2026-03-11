@@ -4,14 +4,14 @@ import { notesApi } from "../../services/notes.service";
 import { useCallback } from "react";
 
 
-export const getNoteList = ({ sortBy = "updated_at", order = "desc" } = {}) => {
+export const getNoteList = ({ sortBy = "updated_at", order = "desc", query = "" } = {}) => {
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchNotes = useCallback(async () => {
+  const fetchNotes = async () => {
     setLoading(true);
     try {
-      const data = await notesApi.getUserNotes(sortBy, order);
+      const data = await notesApi.searchNotes(query, sortBy, order); // include sort/order
       setNotes(data);
     } catch (err) {
       console.error("Failed to fetch notes:", err.message);
@@ -19,19 +19,13 @@ export const getNoteList = ({ sortBy = "updated_at", order = "desc" } = {}) => {
     } finally {
       setLoading(false);
     }
-  }, [sortBy, order]);
+  };
 
-  // Fetch notes initially and whenever sort/order change
   useEffect(() => {
     fetchNotes();
-  }, [fetchNotes]);
+  }, [sortBy, order, query]);
 
-  // Expose a manual refresh function
-  const refreshNotes = useCallback(async () => {
-    return await fetchNotes();
-  }, [fetchNotes]);
-
-  return { notes, loading, refreshNotes };
+  return { notes, loading, refreshNotes: fetchNotes };
 };
 
 

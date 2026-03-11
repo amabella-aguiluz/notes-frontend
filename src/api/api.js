@@ -30,6 +30,9 @@ api.interceptors.response.use(
       localStorage.removeItem("token");
       window.location.href = "/login"; // or use react-router navigate
     }
+
+    console.error("API error:", error.response?.data?.error || error.message);
+    
     return Promise.reject(error);
   }
 );

@@ -1,12 +1,13 @@
 //actionbar.jsx
-import SearchBar from "./searchbar";
+import SearchBar from "./searchBar";
 import AddIcon from '@mui/icons-material/Add';
 
-export const ActionBar = ({ onAddNote, onSortChange }) => {
+export const ActionBar = ({ onAddNote, onSortChange, onSearch }) => {
     return (
-        <div>
+        <div className="actionBar">
             <SearchBar
                 onSortChange={onSortChange}
+                onSearch={onSearch}
             />
             <AddIcon onClick={onAddNote} />
         </div>

@@ -1,0 +1,95 @@
+.notePreview {
+    height: 250px;
+    background-color: whitesmoke;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.notePreview:hover {
+    transform: translateY(-4px) rotate(3deg);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.noteHome {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    width: 100%;
+    /* full width of the page */
+    box-sizing: border-box;
+    /* include padding in width */
+    gap: 10px;
+}
+
+.noteGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    /* cards in rows */
+    gap: 1rem;
+    /* spacing between cards */
+    width: 100%;
+}
+
+.actionBar,
+.topBar {
+    display: flex;
+    align-items: center;
+}
+
+.topBar {
+    justify-content: space-between;
+}
+
+
+.bubbleButton {
+    width: 30px;
+    height: 30px;
+    padding: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background: #f0f0f0;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.bubbleButton:hover {
+    background: #e0e0e0;
+}
+
+.bubbleMenu {
+    display: flex;
+    flex-direction: row;
+}
+
+.editNote {
+    background-color: whitesmoke;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    width: 30%;
+    height: 60%;          /* fixed height */
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;          /* small gap between elements */
+}
+
+/* Editor wrapper fills remaining space */
+.noteEditorContainer {
+    flex-grow: 1;          /* take all remaining space */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;      /* prevent overflowing TipTap content */
+}
+
+.editorContent {
+    flex-grow: 1;          /* stretch to fill wrapper */
+    overflow-y: auto;      /* scroll if content is long */
+    min-height: 0;         /* important for flex items */
+}

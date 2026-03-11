@@ -15,27 +15,15 @@ export const deleteNote = async (note_id) => {
     return data;
 }
 
-export const getUserNotes = async (sortBy, order) => {
-    // getUserNotes() => returns notes sorted by updated_at desc by default
-    // getUserNotes("title", "asc") => returns notes sorted by alphabeical title, ascending
-
-    // check for params (sortBy, order)
-    const params = {};
-    if (sortBy) params.sortBy = sortBy;
-    if (order) params.order = order;
-
-    const { data } = await api.get("/notes", { params });
-    return data;
-}
-
-
 export const getNoteById = async (note_id) => {
     const { data } = await api.get(`/notes/${note_id}`);
     return data;
 }
 
-export const searchNotes = async (query) => {
-    const { data } = await api.get(`/notes/search?query=${encodeURIComponent(query)}`);
+export const searchNotes = async (query, sortBy = "updated_at", order = "desc") => {
+    const { data } = await api.get("/notes/search", {
+        params: { query, sortBy, order },
+    });
     return data;
 }
 
@@ -43,7 +31,6 @@ export const notesApi = {
     createNote,
     updateNote,
     deleteNote,
-    getUserNotes,
     getNoteById,
     searchNotes
 }

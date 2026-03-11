@@ -1,32 +1,23 @@
-
-// src/hooks/auth/useAuth.js
-import { useState, useEffect, useCallback } from "react";
-import { login } from "../../services/auth.service";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/authContext";
 
 export const useLogin = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const { login } = useAuth();   // from context
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
-  // check token on mount
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    setIsAuthenticated(!!token);
-  }, []);
 
   // login function
   const handleLogin = useCallback(async (email, password) => {
     setLoading(true);
     setError(null);
+
     try {
-      await login(email, password); // calls API and stores token
-      setIsAuthenticated(true);
+      await login(email, password);
       navigate("/notes");
     } catch (err) {
-      setError(err.response?.data?.message || "Login failed");
-      setIsAuthenticated(false);
+      setError(err.response?.data?.error);
     } finally {
       setLoading(false);
     }
