@@ -24,3 +24,11 @@
     height: 100%;
     margin: auto;              /* centers the div inside .authPage */
 }
+
+.authForm {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 60%;
+
+}

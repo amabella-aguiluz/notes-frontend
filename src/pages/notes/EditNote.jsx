@@ -39,37 +39,34 @@ const EditNote = ({ note, onClose, onRefresh }) => {
     setTimestamps,
   } = useNote({ note_id: note.note_id, editor });
 
-  // If modal closed internally, notify parent
   const closeNote = () => {
-    handleClose(); // close internal window
-    if (onClose) onClose();  // tell parent
+    handleClose(); 
+    if (onClose) onClose(); 
   };
 
   const handleSave = async () => {
     try {
-      await saveNote();     // Step A: Wait for the API to finish saving
+      await saveNote();    
       if (onRefresh) {
-          onRefresh();      // Step B: Tell NoteHome to re-fetch the list
+          onRefresh();   
       }
-      onClose();            // Step C: Close the modal
+      onClose();          
     } catch (err) {
       console.error("Save failed:", err);
     }
   };
 
-  // 2. Create a "Wrapper" for Deleting
   const handleDelete = async () => {
     try {
       await deleteNote();
       if (onRefresh) onRefresh();
-      onClose();            // Close after delete
+      onClose();           
     } catch (err) {
       console.error("Delete failed:", err);
     }
   };
 
-
-  if (!open) return null; // don't render if closed
+  if (!open) return null;
 
   return (
     <div style={{position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.7)', display:'flex', justifyContent: 'center', alignItems: 'center', zIndex: 999}}
@@ -80,7 +77,7 @@ const EditNote = ({ note, onClose, onRefresh }) => {
       <NoteTitleBar 
         title={title}
         setTitle={setTitle}
-        onSave={handleSave} 
+        onSave={handleSave}  
           onDelete={handleDelete}
       />
 

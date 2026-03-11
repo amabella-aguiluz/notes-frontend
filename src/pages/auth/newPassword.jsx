@@ -37,7 +37,7 @@ export const ResetPassword = () => {
 
   const form = (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="authForm">
         <StyledTextField
           label="New Password"
           type="password"

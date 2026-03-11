@@ -28,7 +28,7 @@ export const ForgotPassword = () => {
 
   const form = (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="authForm">
         <StyledTextField
           label="Email"
           value={email}

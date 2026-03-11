@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
 
 export const useLogin = () => {
-  const { login } = useAuth();   // from context
+  const { user, login, logout: contextLogout } = useAuth();   // from context
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
 
   // login function
   const handleLogin = useCallback(async (email, password) => {
@@ -21,14 +22,12 @@ export const useLogin = () => {
     } finally {
       setLoading(false);
     }
-  }, [navigate]);
+  }, [login, navigate]);
 
-  // logout function
   const logout = useCallback(() => {
-    localStorage.removeItem("token");
-    setIsAuthenticated(false);
+    contextLogout(); 
     navigate("/login");
-  }, [navigate]);
+  }, [contextLogout, navigate]);
 
-  return { isAuthenticated, loading, error, handleLogin, logout };
+  return { loading, error, handleLogin, logout };
 };

@@ -13,7 +13,7 @@ export const LoginInput = ({
   error,
 }) => {
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className="authForm">
       <StyledTextField
         label="Email"
         value={email}

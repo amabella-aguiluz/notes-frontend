@@ -4,7 +4,7 @@ import { Link as RouterLink } from "react-router-dom";
 
 export const RegisterInput = ({ email, setEmail, password, setPassword, passwordConfirm, setPasswordConfirm, onSubmit, error }) => {
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className="authForm">
       <StyledTextField
         label="Email"
         variant="outlined"
