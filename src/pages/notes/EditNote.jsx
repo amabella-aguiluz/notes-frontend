@@ -9,7 +9,7 @@ import StarterKit from '@tiptap/starter-kit';
 import { Divider } from "@mui/material";
 
 
-const EditNote = ({ note, onClose }) => {
+const EditNote = ({ note, onClose, onRefresh }) => {
   const { open, handleOpen, handleClose } = useWindow();
 
   // Open modal when component mounts
@@ -45,6 +45,29 @@ const EditNote = ({ note, onClose }) => {
     if (onClose) onClose();  // tell parent
   };
 
+  const handleSave = async () => {
+    try {
+      await saveNote();     // Step A: Wait for the API to finish saving
+      if (onRefresh) {
+          onRefresh();      // Step B: Tell NoteHome to re-fetch the list
+      }
+      onClose();            // Step C: Close the modal
+    } catch (err) {
+      console.error("Save failed:", err);
+    }
+  };
+
+  // 2. Create a "Wrapper" for Deleting
+  const handleDelete = async () => {
+    try {
+      await deleteNote();
+      if (onRefresh) onRefresh();
+      onClose();            // Close after delete
+    } catch (err) {
+      console.error("Delete failed:", err);
+    }
+  };
+
 
   if (!open) return null; // don't render if closed
 
@@ -57,8 +80,8 @@ const EditNote = ({ note, onClose }) => {
       <NoteTitleBar 
         title={title}
         setTitle={setTitle}
-        onSave={saveNote}
-        onDelete={deleteNote}
+        onSave={handleSave} 
+          onDelete={handleDelete}
       />
 
       <p className="italic">Last modified: {useLocalTime(updated_at)}</p>

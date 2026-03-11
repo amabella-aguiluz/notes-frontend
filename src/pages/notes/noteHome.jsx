@@ -13,7 +13,7 @@ export const NoteHome = () => {
     const [sortBy, setSortBy] = useState("updated_at");
     const [order, setOrder] = useState("desc");
     const [searchQuery, setSearchQuery] = useState("");
-    const { notes, loading } = getNoteList({ sortBy, order, query: searchQuery });
+    const { notes, loading, refreshNotes } = getNoteList({ sortBy, order, query: searchQuery });
 
     const handleAddNote = () => {
         setActiveNote({ note_id: undefined }); // new note
@@ -37,6 +37,7 @@ export const NoteHome = () => {
                 <EditNote
                     note={activeNote}
                     onClose={() => setActiveNote(null)}
+                    onRefresh={refreshNotes}
                 />
             )}
         </div>
