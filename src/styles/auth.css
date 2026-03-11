@@ -14,8 +14,13 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: center;   /* vertical centering */
+    align-items: center;       /* horizontal centering */
     background-color: whitesmoke;
-    gap: 15px;
+    gap: 1rem;
+    padding: 2rem;             /* smaller padding, not 10rem */
+    box-sizing: border-box;    /* ensures padding doesn’t shrink content */
+    width: 100%;
+    height: 100%;
+    margin: auto;              /* centers the div inside .authPage */
 }

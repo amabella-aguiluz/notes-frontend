@@ -2,7 +2,8 @@
 import { useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { resetPassword } from "../../services/auth.service";
-import { TextField, Button, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
+import { AuthButton, StyledTextField } from "./components/components";
 import AuthPage from "./components/auth_page"; // adjust path if needed
 
 export const ResetPassword = () => {
@@ -37,7 +38,7 @@ export const ResetPassword = () => {
   const form = (
     <>
       <form onSubmit={handleSubmit}>
-        <TextField
+        <StyledTextField
           label="New Password"
           type="password"
           value={newPassword}
@@ -46,9 +47,9 @@ export const ResetPassword = () => {
           margin="normal"
           required
         />
-        <Button type="submit" variant="contained" disabled={loading} fullWidth>
+        <AuthButton type="submit" variant="contained" disabled={loading} fullWidth>
           {loading ? "Resetting..." : "Reset Password"}
-        </Button>
+        </AuthButton>
       </form>
       {status && <Typography style={{ marginTop: "1rem" }}>{status}</Typography>}
     </>

@@ -6,19 +6,21 @@ import DeleteIcon from "@mui/icons-material/Delete";
 // edit title bar
 export const NoteTitleBar = ({ title, setTitle, onSave, onDelete }) => {
   return (
-    <div>
+    <div className="m-5px flex justify-between">
       {/* input title */}
-      <input
+      <input className="font-bold text-3xl"
         type="text"
         placeholder="Note title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
       {/* clickable icons */}
-      {/* save on click */}
-      <SaveIcon onClick={onSave} />
-      {/* delete on click */}
-      <DeleteIcon onClick={onDelete} />
+      
+      <div>
+        <SaveIcon onClick={onSave} /> {/* save on click */}
+        <DeleteIcon onClick={onDelete} /> {/* delete on click */}
+      </div>
+
     </div>
   );
 };
@@ -30,12 +32,12 @@ import StarterKit from '@tiptap/starter-kit'
 
 // edit note body
 export const NoteBodyEditor = ({ editor }) => {
-  if(!editor) return null;
+  if (!editor) return null;
   return (
-    <div className="noteEditorContainer">
+    <div className="flex flex-col flex-1 min-h-0 overflow-hidden rounded-lg">
       <>
-        <TextMenu editor={editor}/>
-        <EditorContent className="editorContent" editor={editor} />
+        <TextMenu editor={editor} />
+        <EditorContent className="flex-1 overflow-y-auto" editor={editor} />
       </>
     </div>
   );
@@ -46,23 +48,23 @@ import FormatItalicIcon from '@mui/icons-material/FormatItalic';
 import StrikethroughSIcon from '@mui/icons-material/StrikethroughS';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 
-export const TextMenu = ({editor}) => {
-  if(!editor) return null;
+export const TextMenu = ({ editor }) => {
+  if (!editor) return null;
 
   // todo: make the buttons smaller
-  return(
-  <BubbleMenu className="bubbleMenu" editor={editor}>
-    <button className="bubbleButton" onClick={() => editor.chain().focus().toggleBold().run()}>
-      <FormatBoldIcon />
-    </button>
-    <button className="bubbleButton" onClick={() => editor.chain().focus().toggleItalic().run()}>
-      <FormatItalicIcon />
-    </button>
-    <button className="bubbleButton" onClick={() => editor.chain().focus().toggleStrike().run()}>
-      <StrikethroughSIcon />
-    </button>
-    <button className="bubbleButton" onClick={() => editor.chain().focus().toggleBulletList().run()}>
-      <FormatListBulletedIcon />
-    </button>
-  </BubbleMenu>);
+  return (
+    <BubbleMenu className="bubbleMenu" editor={editor}>
+      <button className="bubbleButton" onClick={() => editor.chain().focus().toggleBold().run()}>
+        <FormatBoldIcon />
+      </button>
+      <button className="bubbleButton" onClick={() => editor.chain().focus().toggleItalic().run()}>
+        <FormatItalicIcon />
+      </button>
+      <button className="bubbleButton" onClick={() => editor.chain().focus().toggleStrike().run()}>
+        <StrikethroughSIcon />
+      </button>
+      <button className="bubbleButton" onClick={() => editor.chain().focus().toggleBulletList().run()}>
+        <FormatListBulletedIcon />
+      </button>
+    </BubbleMenu>);
 };

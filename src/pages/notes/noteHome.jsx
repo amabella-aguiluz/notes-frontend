@@ -1,5 +1,5 @@
 //notehome.jsx
-import TopBar from "./components/topbar";
+import TopBar from "./components/TopBar";
 import ActionBar from "./components/actionBar";
 import NotesGridContainer from "./components/NotesGridContainer";
 import { useState } from "react";
@@ -20,7 +20,7 @@ export const NoteHome = () => {
     };
 
     return (
-        <div className="noteHome">
+        <div className="flex flex-col py-5 px-10 w-full box-border gap-2.5">
             <TopBar />
             <ActionBar onAddNote={handleAddNote}
                 onSortChange={(newSortBy, newOrder) => {

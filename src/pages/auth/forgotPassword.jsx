@@ -1,10 +1,11 @@
 // src/pages/auth/ForgotPassword.jsx
 import { useState } from "react";
 import { forgotPassword } from "../../services/auth.service"; 
-import { TextField, Button, Typography } from "@mui/material";
-import Link from "@mui/material/Link";
+import { Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import AuthPage from "./components/auth_page"; // adjust path if needed
+import { AuthButton, StyledLink, StyledTextField } from "./components/components";
+
 
 export const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -28,7 +29,7 @@ export const ForgotPassword = () => {
   const form = (
     <>
       <form onSubmit={handleSubmit}>
-        <TextField
+        <StyledTextField
           label="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -37,11 +38,11 @@ export const ForgotPassword = () => {
           required
         />
         <p>
-        <Link component={RouterLink} to="/login">Go back</Link>
+        <StyledLink component={RouterLink} to="/login">Go back</StyledLink>
       </p>
-        <Button type="submit" variant="contained" disabled={loading} fullWidth>
+        <AuthButton type="submit" variant="contained" disabled={loading} fullWidth>
           {loading ? "Sending..." : "Send Reset Link"}
-        </Button>
+        </AuthButton>
       </form>
       {status && <Typography style={{ marginTop: "1rem" }}>{status}</Typography>}
     </>
