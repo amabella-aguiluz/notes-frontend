@@ -1,6 +1,6 @@
 //login_input.jsx
 import React from "react";
-import { AuthButton, StyledLink, StyledTextField } from "./components";
+import { AuthButton, StyledLink, StyledTextField } from "../../../components/components";
 import Link from "@mui/material/Link";
 import { Link as RouterLink } from "react-router-dom";
 

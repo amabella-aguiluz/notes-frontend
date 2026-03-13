@@ -13,6 +13,28 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+@font-face {
+  font-family: 'HelpMe';
+  src: url('./assets/HelpMe_Font_1_10/HelpMe.ttf') format('truetype'); 
+  font-weight: normal;
+  font-style: normal;
+}
+
+h1, h2, h3 {
+  font-family: 'HelpMe' !important;
+}
+
+@font-face {
+  font-family: 'crayon';
+  src: url('./assets/dk_crayon_crumble/DK Crayon Crumble.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: 'crayon' !important;
+}
+
 a {
   font-weight: 500;
   color: #646cff;

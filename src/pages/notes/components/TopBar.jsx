@@ -2,7 +2,7 @@
 import Link from "@mui/material/Link";
 import { useAuth } from "../../../context/authContext";
 import { useNavigate } from "react-router-dom";
-import {StyledLink} from "../../auth/components/components";
+import {StyledLink} from "../../../components/components";
 
 // app name + log out button
 export const TopBar = () => {

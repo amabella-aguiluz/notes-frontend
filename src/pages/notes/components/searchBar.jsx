@@ -7,7 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
 import Divider from "@mui/material/Divider";
 import { useWindow } from "../../../hooks/notes/useWindow";
-import { StyledTextField } from "../../auth/components/components";
+import { StyledTextField } from "../../../components/components";
 
 
 // to search for notes by name

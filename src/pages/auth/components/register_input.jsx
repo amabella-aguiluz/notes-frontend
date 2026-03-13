@@ -1,5 +1,5 @@
 import React from "react";
-import { AuthButton, StyledLink, StyledTextField } from "./components";
+import { AuthButton, StyledLink, StyledTextField } from "../../../components/components";
 import { Link as RouterLink } from "react-router-dom";
 
 export const RegisterInput = ({ email, setEmail, password, setPassword, passwordConfirm, setPasswordConfirm, onSubmit, error }) => {

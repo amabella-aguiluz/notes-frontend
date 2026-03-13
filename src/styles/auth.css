@@ -8,6 +8,10 @@
     flex: 1;
     display: flex;
     background-color: grey;
+    background-image: url("../assets/preview16.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .authInput {

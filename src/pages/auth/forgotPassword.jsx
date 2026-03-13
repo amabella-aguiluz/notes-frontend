@@ -4,7 +4,7 @@ import { forgotPassword } from "../../services/auth.service";
 import { Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import AuthPage from "./components/auth_page"; // adjust path if needed
-import { AuthButton, StyledLink, StyledTextField } from "./components/components";
+import { AuthButton, StyledLink, StyledTextField } from "../../components/components";
 
 
 export const ForgotPassword = () => {

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { resetPassword } from "../../services/auth.service";
 import { Typography } from "@mui/material";
-import { AuthButton, StyledTextField } from "./components/components";
+import { AuthButton, StyledTextField } from "../../components/components";
 import AuthPage from "./components/auth_page"; // adjust path if needed
 
 export const ResetPassword = () => {
