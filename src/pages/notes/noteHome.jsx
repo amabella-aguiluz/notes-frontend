@@ -20,7 +20,7 @@ export const NoteHome = () => {
     };
 
     return (
-        <div className="noteHome">
+        <div className="flex flex-col py-5 px-10 w-full box-border gap-2.5">
             <TopBar />
             <ActionBar onAddNote={handleAddNote}
                 onSortChange={(newSortBy, newOrder) => {

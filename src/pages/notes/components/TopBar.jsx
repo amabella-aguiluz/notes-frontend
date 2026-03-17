@@ -2,6 +2,7 @@
 import Link from "@mui/material/Link";
 import { useAuth } from "../../../context/authContext";
 import { useNavigate } from "react-router-dom";
+import {StyledLink} from "../../../components/components";
 
 // app name + log out button
 export const TopBar = () => {
@@ -13,10 +14,10 @@ export const TopBar = () => {
         navigate("/login");
     };
     return (
-        <div className="topBar">
+        <div className="topBar justify-between">
             <h1>Find Your Pages</h1>
             {/* TODO: aesthetically pleasing log out button */}
-            <Link onClick={handleLogout}>Log Out</Link>
+            <StyledLink onClick={handleLogout}>Log Out</StyledLink>
         </div>
     );
 };

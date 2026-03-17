@@ -4,7 +4,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 export const ActionBar = ({ onAddNote, onSortChange, onSearch }) => {
     return (
-        <div className="actionBar">
+        <div className="actionBar py-5">
             <SearchBar
                 onSortChange={onSortChange}
                 onSearch={onSearch}

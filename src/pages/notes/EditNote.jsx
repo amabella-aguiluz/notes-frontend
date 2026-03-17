@@ -6,6 +6,7 @@ import { useEditor } from '@tiptap/react';
 import { useWindow } from "../../hooks/notes/useWindow.js";
 import React from "react";
 import StarterKit from '@tiptap/starter-kit';
+import { Divider } from "@mui/material";
 
 
 const EditNote = ({ note, onClose, onRefresh }) => {
@@ -19,7 +20,14 @@ const EditNote = ({ note, onClose, onRefresh }) => {
   const editor = useEditor({
     extensions: [StarterKit],
     content: '',
-  });
+    editorProps: {
+    attributes: {
+      // 'h-full' makes the editable area fill the EditorContent container
+      // 'outline-none' removes the blue border when clicking
+      class: 'h-full p-2 rounded-lg outline-none text-base', 
+    },
+  },
+});
 
   const {
     title,
@@ -31,56 +39,55 @@ const EditNote = ({ note, onClose, onRefresh }) => {
     setTimestamps,
   } = useNote({ note_id: note.note_id, editor });
 
-  // If modal closed internally, notify parent
   const closeNote = () => {
-    handleClose(); // close internal window
-    if (onClose) onClose();  // tell parent
+    handleClose(); 
+    if (onClose) onClose(); 
   };
 
   const handleSave = async () => {
     try {
-      await saveNote();     // Step A: Wait for the API to finish saving
+      await saveNote();    
       if (onRefresh) {
-          onRefresh();      // Step B: Tell NoteHome to re-fetch the list
+          onRefresh();   
       }
-      onClose();            // Step C: Close the modal
+      onClose();          
     } catch (err) {
       console.error("Save failed:", err);
     }
   };
 
-  // 2. Create a "Wrapper" for Deleting
   const handleDelete = async () => {
     try {
       await deleteNote();
       if (onRefresh) onRefresh();
-      onClose();            // Close after delete
+      onClose();           
     } catch (err) {
       console.error("Delete failed:", err);
     }
   };
 
-
-  if (!open) return null; // don't render if closed
+  if (!open) return null;
 
   return (
-    <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 999 }}
-      onClick={closeNote}>
-      <div className="editNote"
-        onClick={e => e.stopPropagation()}
-      >
-        <NoteTitleBar
-          title={title}
-          setTitle={setTitle}
-          onSave={handleSave}   // <-- Use the new handler
+    <div style={{position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.7)', display:'flex', justifyContent: 'center', alignItems: 'center', zIndex: 999}}
+    onClick={closeNote}>
+    <div className="bg-gray-100 p-6 rounded-md w-[30%] h-[60%] flex flex-col gap-1 " 
+        onClick={e => e.stopPropagation() }
+     >
+      <NoteTitleBar 
+        title={title}
+        setTitle={setTitle}
+        onSave={handleSave}  
           onDelete={handleDelete}
-        />
+      />
 
-        <p>Last modified: {useLocalTime(updated_at)}</p>
-        <p>Created: {useLocalTime(created_at)}</p>
+      <p className="italic">Last modified: {useLocalTime(updated_at)}</p>
+      <p className="italic">Created: {useLocalTime(created_at)}</p>
 
-        <NoteBodyEditor editor={editor} />
-      </div>
+      <Divider />
+
+      <NoteBodyEditor className="flex-1" editor={editor} />
+    </div>
     </div>
   );
 };

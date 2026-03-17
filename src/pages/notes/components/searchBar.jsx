@@ -1,4 +1,4 @@
-import TextField from "@mui/material/TextField";
+
 import SearchIcon from '@mui/icons-material/Search';
 import InputAdornment from "@mui/material/InputAdornment";
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
@@ -7,6 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
 import Divider from "@mui/material/Divider";
 import { useWindow } from "../../../hooks/notes/useWindow";
+import { StyledTextField } from "../../../components/components";
 
 
 // to search for notes by name
@@ -46,8 +47,8 @@ export const SearchBar = ({ onSortChange, onSearch }) => {
     };
 
     return (
-        <div>
-            <TextField id="outlined-basic" label="Search..." variant="outlined"
+        <div className="searchBar">
+            <StyledTextField id="outlined-basic" label="Search..." variant="outlined"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={handleKeyPress}
