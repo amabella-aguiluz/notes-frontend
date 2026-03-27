@@ -16,7 +16,7 @@ export const NoteTitleBar = ({ title, setTitle, onSave, onDelete }) => {
       />
       {/* clickable icons */}
       
-      <div>
+      <div className="flex flex-row">
         <SaveIcon onClick={onSave} /> {/* save on click */}
         <DeleteIcon onClick={onDelete} /> {/* delete on click */}
       </div>

@@ -12,6 +12,8 @@ import { useState, useMemo } from "react";
 import shape1 from "../../assets/note-shape/note_1.svg";
 import shape2 from "../../assets/note-shape/note_2.svg";
 import shape3 from "../../assets/note-shape/note_3.svg";
+import texture from "../../assets/paper-texture.avif";
+
 
 const shapes = [shape1, shape2, shape3];
 
@@ -80,7 +82,7 @@ const EditNote = ({ note, onClose, onRefresh }) => {
   return (
     <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 999 }}
       onClick={closeNote}>
-      <div className="bg-gray-100 p-15 rounded-md w-[40%] h-[70%] flex flex-col gap-1 "
+      <div className="bg-gray-100 p-20 rounded-md w-[25%] h-[70%] flex flex-col gap-1 "
         onClick={e => e.stopPropagation()}
         style={{
           WebkitMaskImage: `url(${svgPath})`,
@@ -90,6 +92,10 @@ const EditNote = ({ note, onClose, onRefresh }) => {
           WebkitMaskRepeat: 'no-repeat',
           maskRepeat: 'no-repeat',
           backgroundColor: '#ffffff',
+
+          backgroundImage: `url(${texture})`,
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
         }}
       >
         <NoteTitleBar

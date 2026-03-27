@@ -6,6 +6,7 @@ import { useMemo } from "react";
 import shape1 from "../../../assets/note-shape/note_1.svg";
 import shape2 from "../../../assets/note-shape/note_2.svg";
 import shape3 from "../../../assets/note-shape/note_3.svg";
+import texture from "../../../assets/paper-texture.avif";
 
 const SHAPES = [shape1, shape2, shape3];
 
@@ -21,7 +22,7 @@ export const NotePreview = ({ id, title, description, updated_at, created_at, on
     const initialRotation = useMemo(() => (Math.random() * 4 - 2).toFixed(1), []);
 
     return (
-        <div className="h-[300px] p-10 py-15 bg-gray-100 shadow-sm flex flex-col gap-2 cursor-pointer 
+        <div className="h-[300px] p-10 bg-gray-100 shadow-sm flex flex-col gap-2 cursor-pointer 
             transition-transform transition-shadow duration-200 
             hover:scale-[1.05] hover:-translate-y-1 hover:rotate-[3deg] hover:shadow-lg"
             onClick={onOpen}
@@ -33,8 +34,12 @@ export const NotePreview = ({ id, title, description, updated_at, created_at, on
                 WebkitMaskRepeat: 'no-repeat',
                 maskRepeat: 'no-repeat',
 
-                backgroundColor: '#dadada', // Or any color you want the paper to be
-                transform: `rotate(${initialRotation}deg)`, // The "scattered" effect
+                backgroundImage: `url(${texture})`,
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+
+                backgroundColor: '#dadada',
+                transform: `rotate(${initialRotation}deg)`,
                 filter: 'drop-shadow(0 4px 3px rgb(0 0 0 / 0.07))',
             }}
         >
