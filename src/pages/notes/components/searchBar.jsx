@@ -1,7 +1,4 @@
-
-import SearchIcon from '@mui/icons-material/Search';
 import InputAdornment from "@mui/material/InputAdornment";
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
@@ -9,6 +6,9 @@ import Divider from "@mui/material/Divider";
 import { useWindow } from "../../../hooks/notes/useWindow";
 import { StyledTextField } from "../../../components/components";
 
+import ClickIcon from './ClickIcon';
+import search from '../../../assets/icons/Notes_assets/search.png'
+import filter from '../../../assets/icons/Notes_assets/filter.png'
 
 // to search for notes by name
 export const SearchBar = ({ onSortChange, onSearch }) => {
@@ -55,13 +55,20 @@ export const SearchBar = ({ onSortChange, onSearch }) => {
                 InputProps={{
                     endAdornment: (
                         <InputAdornment position="end">
-                            <SearchIcon onClick={handleSearch} />
+                            <ClickIcon
+                                src={search}
+                                alt="Search"
+                                onClick={handleSearch}
+                                size={20}
+                            />
                         </InputAdornment>),
                 }} /> <FilterAltIcon onClick={handleOpen} />
-            <FilterButton anchorEl={window}
-                open={open}
-                handleClose={handleClose}
-                handleSelect={handleSelect} />
+            <ClickIcon
+                src={filter}
+                alt="Filter"
+                onClick={handleOpen}
+                size={24}
+            />
         </div>
     );
 };
