@@ -1,7 +1,8 @@
 // src/components/NoteTitleBar.jsx
-import React from "react";
-import SaveIcon from "@mui/icons-material/Save";
-import DeleteIcon from "@mui/icons-material/Delete";
+import ClickIcon from './ClickIcon';
+import save from '../../../assets/icons/Notes_assets/save.png'
+import del from '../../../assets/icons/Notes_assets/delete.png'
+
 
 // edit title bar
 export const NoteTitleBar = ({ title, setTitle, onSave, onDelete }) => {
@@ -16,9 +17,17 @@ export const NoteTitleBar = ({ title, setTitle, onSave, onDelete }) => {
       />
       {/* clickable icons */}
       
-      <div>
-        <SaveIcon onClick={onSave} /> {/* save on click */}
-        <DeleteIcon onClick={onDelete} /> {/* delete on click */}
+      <div className="flex flex-row">
+        <ClickIcon
+          src={save}
+          alt="Save"
+          onClick={onSave}
+        />
+        <ClickIcon
+          src={del}
+          alt="Delete"
+          onClick={onDelete}
+        />
       </div>
 
     </div>
