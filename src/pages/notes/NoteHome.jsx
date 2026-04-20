@@ -1,4 +1,4 @@
-//notehome.jsx
+//NoteHome.jsx
 import TopBar from "./components/TopBar";
 import ActionBar from "./components/ActionBar";
 import NotesGridContainer from "./components/NotesGridContainer";
