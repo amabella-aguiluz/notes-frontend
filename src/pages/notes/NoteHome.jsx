@@ -1,6 +1,6 @@
-//notehome.jsx
+//NoteHome.jsx
 import TopBar from "./components/TopBar";
-import ActionBar from "./components/actionBar";
+import ActionBar from "./components/ActionBar";
 import NotesGridContainer from "./components/NotesGridContainer";
 import { useState } from "react";
 import EditNote from "./EditNote";

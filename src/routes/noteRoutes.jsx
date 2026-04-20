@@ -2,7 +2,7 @@
 import { Routes, Route } from "react-router-dom";
 import NotePreview from "../pages/notes/components/NotePreview";
 import EditNote from "../pages/notes/EditNote";
-import NoteHome from "../pages/notes/noteHome";
+import NoteHome from "../pages/notes/NoteHome";
 // import {ProtectedRoute} from "./protectedRoutes";
 
 export const NoteRoutes = () => {
