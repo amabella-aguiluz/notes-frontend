@@ -62,7 +62,7 @@ export const SearchBar = ({ onSortChange, onSearch }) => {
                                 size={20}
                             />
                         </InputAdornment>),
-                }} /> <FilterAltIcon onClick={handleOpen} />
+                }} />
             <ClickIcon
                 src={filter}
                 alt="Filter"
