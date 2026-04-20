@@ -103,7 +103,10 @@ const EditNote = ({ note, onClose, onRefresh }) => {
           setTitle={setTitle}
           onSave={handleSave}
           onDelete={handleDelete}
-        />
+      />
+
+      <p className="italic">Last modified: {useLocalTime(updated_at)}</p>
+      <p className="italic">Created: {useLocalTime(created_at)}</p>
 
         <p className="italic">Last modified: {useLocalTime(updated_at)}</p>
         <p className="italic">Created: {useLocalTime(created_at)}</p>
