@@ -17,12 +17,15 @@ export const AuthButton = styled(Button)({
 });
 
 import TextField from '@mui/material/TextField';
+import texture from '../assets/paper-texture.avif';
 
 export const StyledTextField = styled(TextField)({
   
 
   '& .MuiOutlinedInput-root': {
-    backgroundColor: '#f5f5f5',
+     backgroundImage: `url(${texture})`,
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat',
     borderRadius: '12px',
     '& fieldset': { borderColor: '#ccc' },
     '&:hover fieldset': { borderColor: '#888' },

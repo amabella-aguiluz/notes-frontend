@@ -9,6 +9,7 @@ import { StyledTextField } from "../../../components/components";
 import ClickIcon from './ClickIcon';
 import search from '../../../assets/icons/Notes_assets/search.png'
 import filter from '../../../assets/icons/Notes_assets/filter.png'
+import texture from "../../../assets/paper-texture.avif";
 
 // to search for notes by name
 export const SearchBar = ({ onSortChange, onSearch }) => {
@@ -69,6 +70,12 @@ export const SearchBar = ({ onSortChange, onSearch }) => {
                 onClick={handleOpen}
                 size={24}
             />
+            <FilterButton
+                anchorEl={window}
+                open={open}
+                handleClose={handleClose}
+                handleSelect={handleSelect}
+            />
         </div>
     );
 };
@@ -80,13 +87,21 @@ export const FilterButton = ({ anchorEl, open, handleClose, handleSelect }) => {
         <Menu
             anchorEl={anchorEl}
             open={open}
-            onClose={handleClose}>
+            onClose={handleClose}
+            PaperProps={{
+                style: {
+                    backgroundImage: `url(${texture})`,
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat',
+                }
+            }}>
             <MenuItem onClick={() => handleSelect("ascending")}>Ascending</MenuItem>
             <MenuItem onClick={() => handleSelect("descending")}>Descending</MenuItem>
             <Divider />
             <MenuItem onClick={() => handleSelect("title")}>Title</MenuItem>
             <MenuItem onClick={() => handleSelect("updated_at")}>Updated At</MenuItem>
             <MenuItem onClick={() => handleSelect("created_at")}>Created At</MenuItem>
+
         </Menu>
     )
 }

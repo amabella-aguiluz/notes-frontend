@@ -6,6 +6,7 @@ import { useState } from "react";
 import EditNote from "./EditNote";
 import { getNoteList } from "../../hooks/notes/useNotePreview";
 import "../../styles/notes.css";
+import texture from "../../assets/paper-texture.avif";
 
 export const NoteHome = () => {
     const [activeNote, setActiveNote] = useState(null);
@@ -20,27 +21,36 @@ export const NoteHome = () => {
     };
 
     return (
-        <div className="flex flex-col py-5 px-10 w-full box-border gap-2.5">
+        <div className="flex flex-col p-10 w-full min-h-screen box-border gap-2.5"
+            style={{
+                backgroundImage: `url(${texture})`,
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+            }}
+        >
             <TopBar />
-            <ActionBar onAddNote={handleAddNote}
-                onSortChange={(newSortBy, newOrder) => {
-                    setSortBy(newSortBy);
-                    setOrder(newOrder);
-                }}
-                onSearch={(q) => setSearchQuery(q)} />
-            <NotesGridContainer
-                notes={notes}
-                loading={loading}
-                onOpenNote={(note) => setActiveNote(note)} />
+            <div>
+                <ActionBar onAddNote={handleAddNote}
+                    onSortChange={(newSortBy, newOrder) => {
+                        setSortBy(newSortBy);
+                        setOrder(newOrder);
+                    }}
+                    onSearch={(q) => setSearchQuery(q)} />
+                <NotesGridContainer
+                    notes={notes}
+                    loading={loading}
+                    onOpenNote={(note) => setActiveNote(note)} />
 
-            {activeNote && (
-                <EditNote
-                    note={activeNote}
-                    onClose={() => setActiveNote(null)}
-                    onRefresh={refreshNotes}
-                />
-            )}
-        </div>
+                {activeNote && (
+                    <EditNote
+                        note={activeNote}
+                        onClose={() => setActiveNote(null)}
+                        onRefresh={refreshNotes}
+                    />
+                )}
+            </div>
+        </div >
     )
 }
 
