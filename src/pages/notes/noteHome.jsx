@@ -1,0 +1,42 @@
+//notehome.jsx
+import TopBar from "./components/topbar";
+import ActionBar from "./components/ActionBar";
+import NotesGridContainer from "./components/NotesGridContainer";
+import { useState } from "react";
+import EditNote from "./EditNote";
+import {getNoteList} from "../../hooks/notes/useNotePreview";
+
+export const NoteHome = () => {
+    const [activeNote, setActiveNote] = useState(null);
+
+    const [sortBy, setSortBy] = useState("updated_at");
+    const [order, setOrder] = useState("desc");
+    const [searchQuery, setSearchQuery] = useState("");
+    const { notes, loading } = getNoteList({ sortBy, order, query: searchQuery });
+
+    const handleAddNote = () => {
+        setActiveNote({ note_id: undefined }); // new note
+    };
+
+    return (
+        <div id="noteHome">
+            <TopBar />
+            <ActionBar onAddNote={handleAddNote}
+                onSortChange={(newSortBy, newOrder) => {
+                    setSortBy(newSortBy);
+                    setOrder(newOrder);
+                }}
+                onSearch={(q) => setSearchQuery(q)} />
+            <NotesGridContainer notes={notes} loading={loading} />
+
+            {activeNote && (
+                <EditNote
+                    note={activeNote}
+                    onClose={() => setActiveNote(null)}
+                />
+            )}
+        </div>
+    )
+}
+
+export default NoteHome;
