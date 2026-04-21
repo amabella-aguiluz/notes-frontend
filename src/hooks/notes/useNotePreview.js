@@ -1,6 +1,7 @@
 // src/hooks/notes/useNotesPreview.js
 import { useState, useEffect, useMemo } from "react";
 import { notesApi } from "../../services/notes.service";
+import { useCallback } from "react";
 
 
 export const getNoteList = ({ sortBy = "updated_at", order = "desc", query = "" } = {}) => {

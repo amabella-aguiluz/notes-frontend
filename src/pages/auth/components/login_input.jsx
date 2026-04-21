@@ -1,7 +1,6 @@
 //login_input.jsx
 import React from "react";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
+import { AuthButton, StyledLink, StyledTextField } from "../../../components/components";
 import Link from "@mui/material/Link";
 import { Link as RouterLink } from "react-router-dom";
 
@@ -14,30 +13,27 @@ export const LoginInput = ({
   error,
 }) => {
   return (
-    <form onSubmit={onSubmit}>
-      <TextField
+    <form onSubmit={onSubmit} className="authForm">
+      <StyledTextField
         label="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
 
-      <TextField
+      <StyledTextField
         label="Password"
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <p>
-        <Link component={RouterLink} to="/register">Forgot password?</Link>
-      </p>
-
-      <Button type="submit" variant="contained">
+      
+      <AuthButton type="submit" variant="contained">
         Login
-      </Button>
+      </AuthButton>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
       <p>
-        Dont have an account yet? <Link component={RouterLink} to="/register">Register here</Link>
+        Dont have an account yet? <StyledLink component={RouterLink} to="/register">Register here</StyledLink>
       </p>
     </form>
   );

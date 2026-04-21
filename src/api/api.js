@@ -1,6 +1,8 @@
 import axios from "axios";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+console.log("BACKEND URL:", BACKEND_URL);
+console.log(import.meta.env);
 
 export const api = axios.create({
     baseURL: BACKEND_URL,
@@ -30,6 +32,9 @@ api.interceptors.response.use(
       localStorage.removeItem("token");
       window.location.href = "/login"; // or use react-router navigate
     }
+
+    console.error("API error:", error.response?.data?.error || error.message);
+    
     return Promise.reject(error);
   }
 );

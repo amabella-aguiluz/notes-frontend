@@ -2,7 +2,6 @@
 import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
 import UserRoutes from "./userRoutes";
 import NoteRoutes from "./noteRoutes";
-// import ProtectedRoute from "./protectedRoutes";
 
 const AppRoutes = () => {
   return (
