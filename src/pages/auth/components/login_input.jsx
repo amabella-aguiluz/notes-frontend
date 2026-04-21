@@ -26,10 +26,7 @@ export const LoginInput = ({
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <p>
-        <StyledLink component={RouterLink} to="/forgot-password">Forgot password?</StyledLink>
-      </p>
-
+      
       <AuthButton type="submit" variant="contained">
         Login
       </AuthButton>
