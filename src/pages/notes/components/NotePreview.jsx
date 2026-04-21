@@ -22,34 +22,41 @@ export const NotePreview = ({ id, title, description, updated_at, created_at, on
     const initialRotation = useMemo(() => (Math.random() * 4 - 2).toFixed(1), []);
 
     return (
-        <div className="h-[300px] p-10 bg-gray-100 shadow-sm flex flex-col gap-2 cursor-pointer 
-            transition-transform transition-shadow duration-200 
-            hover:scale-[1.05] hover:-translate-y-1 hover:rotate-[3deg] hover:shadow-lg"
+        <div
+            className="cursor-pointer transition-transform duration-200 hover:scale-[1.05] hover:-translate-y-1"
             onClick={onOpen}
             style={{
-                WebkitMaskImage: `url(${randomShape})`,
-                maskImage: `url(${randomShape})`,
-                WebkitMaskSize: '100% 100%',
-                maskSize: '100% 100%',
-                WebkitMaskRepeat: 'no-repeat',
-                maskRepeat: 'no-repeat',
+                display: "inline-block",
+                filter: "drop-shadow(-10px 14px 10px rgba(0,0,0,0.25))"
+            }}>
+            <div className="h-[300px] p-7 bg-gray-200 flex flex-col gap-2 cursor-pointer 
+                transition-transform transition-shadow duration-200 
+                hover:scale-[1.05] hover:-translate-y-1 hover:rotate-[3deg]"
+                onClick={onOpen}
+                style={{
+                    WebkitMaskImage: `url(${randomShape})`,
+                    maskImage: `url(${randomShape})`,
+                    WebkitMaskSize: '100% 100%',
+                    maskSize: '100% 100%',
+                    WebkitMaskRepeat: 'no-repeat',
+                    maskRepeat: 'no-repeat',
 
-                backgroundImage: `url(${texture})`,
-                backgroundSize: 'cover',
-                backgroundRepeat: 'no-repeat',
+                    backgroundImage: `url(${texture})`,
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat',
 
-                backgroundColor: '#dadada',
-                transform: `rotate(${initialRotation}deg)`,
-                filter: 'drop-shadow(0 4px 3px rgb(0 0 0 / 0.07))',
-            }}
-        >
-            <div>
-                <h3 className="font-bold">{title}</h3>
-                <p className="text-sm italic">Last modified: {useLocalTime(updated_at)}</p>
-                <p className="text-sm italic">Created: {useLocalTime(created_at)}</p>
-                <p>{firstParagraph || "No content"}</p> {/* Show only first paragraph */}
-            </div>
-        </div >
+                    backgroundColor: '#dadada',
+                    transform: `rotate(${initialRotation}deg)`,
+                }}
+            >
+                <div>
+                    <h3 className="font-bold">{title}</h3>
+                    <p className="text-sm italic">Last modified: {useLocalTime(updated_at)}</p>
+                    <p className="text-sm italic">Created: {useLocalTime(created_at)}</p>
+                    <p>{firstParagraph || "No content"}</p> {/* Show only first paragraph */}
+                </div>
+            </div >
+        </div>
     );
 };
 

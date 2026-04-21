@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 const Flashlight = () => {
-    const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 }); // Start off-screen
+    const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 });
 
     useEffect(() => {
         const handleMouseMove = (e) => {
@@ -19,13 +19,13 @@ const Flashlight = () => {
                 inset: 0,
                 pointerEvents: 'none',
                 zIndex: 9999,
-                transition: 'background 0.05s ease-out', // Makes movement feel smoother
+                transition: 'background 0.05s ease-out',
                 background: `radial-gradient(
           400px at ${mousePos.x}px ${mousePos.y}px, 
           transparent 0%, 
         rgba(0, 0, 0, 0) 10%,  
         rgba(0, 0, 0, 0.2) 40%, 
-        rgba(0, 0, 0, 0.5) 80%, 
+        rgba(0, 0, 0, 0.5) 70%, 
         rgba(0, 0, 0, 0.95) 500%)`
             }}
         />
