@@ -82,10 +82,9 @@ const EditNote = ({ note, onClose, onRefresh }) => {
   return (
     <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 999 }}
       onClick={closeNote}>
-      <div className="bg-gray-100 p-10 px-15 rounded-md w-[25%] h-[70%] flex flex-col gap-1 "
+      <div className="bg-gray-100 p-10 pr-5 pl-15 rounded-md w-[25%] h-[70%] flex flex-col gap-1 "
         onClick={e => e.stopPropagation()}
         style={{
-          WebkitMaskImage: `url(${svgPath})`,
           maskImage: `url(${svgPath})`,
           WebkitMaskSize: '100% 100%',
           maskSize: '100% 100%',

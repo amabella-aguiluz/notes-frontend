@@ -3,13 +3,12 @@ import ClickIcon from './ClickIcon';
 import save from '../../../assets/icons/Notes_assets/save.png'
 import del from '../../../assets/icons/Notes_assets/delete.png'
 
-
 // edit title bar
 export const NoteTitleBar = ({ title, setTitle, onSave, onDelete }) => {
   return (
-    <div className="m-5px flex justify-between">
+    <div className="m-5px  flex justify-between gap-1">
       {/* input title */}
-      <input className="font-bold text-3xl"
+      <input className="font-bold text-3xl flex flex-1 min-w-0"
         type="text"
         placeholder="Note title"
         value={title}
@@ -17,7 +16,7 @@ export const NoteTitleBar = ({ title, setTitle, onSave, onDelete }) => {
       />
       {/* clickable icons */}
       
-      <div className="flex flex-row">
+      <div className="flex flex-row gap-1 shrink-0">
         <ClickIcon
           src={save}
           alt="Save"
