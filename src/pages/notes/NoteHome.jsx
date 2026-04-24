@@ -6,7 +6,7 @@ import { useState } from "react";
 import EditNote from "./EditNote";
 import { getNoteList } from "../../hooks/notes/useNotePreview";
 import "../../styles/notes.css";
-import texture from "../../assets/paper-texture.avif";
+import texture from "../../assets/wood.jpg";
 
 export const NoteHome = () => {
     const [activeNote, setActiveNote] = useState(null);
