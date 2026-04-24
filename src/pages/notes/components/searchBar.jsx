@@ -1,13 +1,15 @@
-import TextField from "@mui/material/TextField";
-import SearchIcon from '@mui/icons-material/Search';
 import InputAdornment from "@mui/material/InputAdornment";
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
 import Divider from "@mui/material/Divider";
 import { useWindow } from "../../../hooks/notes/useWindow";
+import { StyledTextField } from "../../../components/components";
 
+import ClickIcon from './ClickIcon';
+import search from '../../../assets/icons/Notes_assets/search.png'
+import filter from '../../../assets/icons/Notes_assets/filter.png'
+import texture from "../../../assets/paper-texture.avif";
 
 // to search for notes by name
 export const SearchBar = ({ onSortChange, onSearch }) => {
@@ -46,21 +48,34 @@ export const SearchBar = ({ onSortChange, onSearch }) => {
     };
 
     return (
-        <div>
-            <TextField id="outlined-basic" label="Search..." variant="outlined"
+        <div className="searchBar">
+            <StyledTextField id="outlined-basic" label="Search..." variant="outlined"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={handleKeyPress}
                 InputProps={{
                     endAdornment: (
                         <InputAdornment position="end">
-                            <SearchIcon onClick={handleSearch} />
+                            <ClickIcon
+                                src={search}
+                                alt="Search"
+                                onClick={handleSearch}
+                                size={20}
+                            />
                         </InputAdornment>),
-                }} /> <FilterAltIcon onClick={handleOpen} />
-            <FilterButton anchorEl={window}
+                }} />
+            <ClickIcon
+                src={filter}
+                alt="Filter"
+                onClick={handleOpen}
+                size={24}
+            />
+            <FilterButton
+                anchorEl={window}
                 open={open}
                 handleClose={handleClose}
-                handleSelect={handleSelect} />
+                handleSelect={handleSelect}
+            />
         </div>
     );
 };
@@ -72,13 +87,21 @@ export const FilterButton = ({ anchorEl, open, handleClose, handleSelect }) => {
         <Menu
             anchorEl={anchorEl}
             open={open}
-            onClose={handleClose}>
+            onClose={handleClose}
+            PaperProps={{
+                style: {
+                    backgroundImage: `url(${texture})`,
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat',
+                }
+            }}>
             <MenuItem onClick={() => handleSelect("ascending")}>Ascending</MenuItem>
             <MenuItem onClick={() => handleSelect("descending")}>Descending</MenuItem>
             <Divider />
             <MenuItem onClick={() => handleSelect("title")}>Title</MenuItem>
             <MenuItem onClick={() => handleSelect("updated_at")}>Updated At</MenuItem>
             <MenuItem onClick={() => handleSelect("created_at")}>Created At</MenuItem>
+
         </Menu>
     )
 }
