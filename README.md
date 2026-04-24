@@ -1,17 +1,40 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Find Your Pages
 
-Currently, two official plugins are available:
+A full-stack horror-themed notes app featuring authentication and rich text editing.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Live Demo:
+https://find-your-pages.vercel.app/
 
-## React Compiler
+### Features
+- Responsive Horror-themed UI
+- Real-time UI updates after note operations
+- Rich text editor with options for italic, bold, and strikethrough text
+- JWT-based user authentication with protected routes
+- API integration with backend services
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+# Tech Stack
+- **React** – UI and state management  
+- **Tailwind CSS** – Styling and layout  
+- **Material UI** – Prebuilt UI components
 
-## Expanding the ESLint configuration
+- **Docker** - Containerization
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-# notes-frontend
+## Why I Built This
+This project was built to implement authentication flows, manage application state in React, and design a responsive UI with a custom theme.
+
+# Setup
+### Environment variables
+Set up environment variables as needed in .env
+
+### Runtime commands
+```
+npm install
+npm run dev
+```
+
+# Notes
+- Backend must be running for API calls
+
+# Related Repos
+- Backend: https://github.com/amabella-aguiluz/notes-backend.git
