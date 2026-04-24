@@ -1,5 +1,5 @@
 import "../../../styles/auth.css";
-import texture from "../../../assets/paper-texture.avif";
+import texture from "../../../assets/wood.jpg";
 
 export const AuthPage = ({ type, typeInput }) => {
     return (
